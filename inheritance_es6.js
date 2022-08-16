@@ -6,7 +6,7 @@ class Builder {
 
 class IntBuilder extends Builder {
   constructor(data){
-    super(),
+    super();
     this.data = data
   }
   plus(...n) {
@@ -40,7 +40,7 @@ console.log(IntBuilder.random(3,5))
 
 class StringBuilder extends Builder {
   constructor(data){
-    super(),
+    super();
     this.data = data
   }
   plus(...n) {
