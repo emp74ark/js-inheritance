@@ -1,30 +1,40 @@
 class Builder {
+  constructor(data){
+    this.data = data
+  }
+  #isNumber() {
+    return typeof this.data === 'number'
+  }
   get() {
     return console.log(this.data)
   }
-} 
+  plus(...n){
+    [...n].forEach((el)=>{
+      this.data += el
+    })
+    return this
+  }
+  minus(...n){
+    this.data = this.#isNumber()
+      ? this.data - [...n].reduce((a, b) => a + b)
+      : this.data.slice(0, this.data.length - n);
+    return this;
+  }
+  multiply(n){
+    this.data = this.#isNumber() 
+      ? this.data * n 
+      : this.data.repeat(n);
+    return this;
+  }
+  divide(n){
+    this.data = this.#isNumber()
+      ? this.data /= n
+      : this.data.slice(0, Math.floor(this.data.length / n));
+    return this;
+  }
+}
 
 class IntBuilder extends Builder {
-  constructor(data){
-    super();
-    this.data = data
-  }
-  plus(...n) {
-    this.data += [...n].reduce((a, b) => a + b);
-    return this;
-  }
-  minus(...n) {
-    this.data -= [...n].reduce((a, b) => a + b);
-    return this;
-  }
-  multiply(n) {
-    this.data *= n;
-    return this;
-  }
-  divide(n) {
-    this.data /= n;
-    return this;
-  }
   mod(n) {
     this.data %= n;
     return this;
@@ -39,26 +49,6 @@ intBuilder.plus(2, 3, 2).minus(1, 2).multiply(2).divide(4).mod(3).get();
 console.log(IntBuilder.random(3,5))
 
 class StringBuilder extends Builder {
-  constructor(data){
-    super();
-    this.data = data
-  }
-  plus(...n) {
-    this.data += [...n];
-    return this;
-  }
-  minus(n) {
-    this.data = this.data.slice(0, this.data.length - n);
-    return this;
-  }
-  multiply(n) {
-    this.data = this.data.repeat(n);
-    return this;
-  }
-  divide(n) {
-    this.data = this.data.slice(0, Math.floor(this.data.length / n));
-    return this;
-  }
   remove(str) {
     this.data = this.data.split('').filter((w) => w !== str).join('');
     return this;
