@@ -1,3 +1,7 @@
+/*     */
+/* ES6 */
+/*     */
+
 class Builder {
   constructor(data){
     this.data = data
